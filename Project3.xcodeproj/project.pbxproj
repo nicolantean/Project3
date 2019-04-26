@@ -25,6 +25,7 @@
 		9AB9699522722BC000D774DE /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AB9699422722BC000D774DE /* Lato-Bold.ttf */; };
 		9AB9699722722D6500D774DE /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AB9699622722D6500D774DE /* Lato-Regular.ttf */; };
 		9AB9699922722E4200D774DE /* MovieFanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB9699822722E4200D774DE /* MovieFanViewController.swift */; };
+		9AE56BA9227359D400DE31B4 /* MovieFanDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AE56BA8227359D400DE31B4 /* MovieFanDataBase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		9AB9699422722BC000D774DE /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
 		9AB9699622722D6500D774DE /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
 		9AB9699822722E4200D774DE /* MovieFanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieFanViewController.swift; sourceTree = "<group>"; };
+		9AE56BA8227359D400DE31B4 /* MovieFanDataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieFanDataBase.swift; sourceTree = "<group>"; };
 		A464CEFA5147C8017DD2A881 /* Pods_Project3.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Project3.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -175,6 +177,7 @@
 		9A6675F72271F4DF00B5B59A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				9AE56BA8227359D400DE31B4 /* MovieFanDataBase.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 				9A6676012271FD9300B5B59A /* PageViewController.swift in Sources */,
 				9A4D807D22723B5F00BFAA8E /* MoviesData.swift in Sources */,
 				9A6675FB2271FD0D00B5B59A /* PageOneViewController.swift in Sources */,
+				9AE56BA9227359D400DE31B4 /* MovieFanDataBase.swift in Sources */,
 				9A6675DF2271F4BC00B5B59A /* AppDelegate.swift in Sources */,
 				9A6675FD2271FD2000B5B59A /* PageTwoViewController.swift in Sources */,
 			);
