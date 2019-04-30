@@ -25,6 +25,7 @@
 		9AB9699522722BC000D774DE /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AB9699422722BC000D774DE /* Lato-Bold.ttf */; };
 		9AB9699722722D6500D774DE /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AB9699622722D6500D774DE /* Lato-Regular.ttf */; };
 		9AB9699922722E4200D774DE /* MovieFanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB9699822722E4200D774DE /* MovieFanViewController.swift */; };
+		9AD284A82277484900CEECBA /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD284A72277484900CEECBA /* FilterViewController.swift */; };
 		9AE56BA9227359D400DE31B4 /* MovieFanDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AE56BA8227359D400DE31B4 /* MovieFanDataBase.swift */; };
 /* End PBXBuildFile section */
 
@@ -39,7 +40,7 @@
 		9A6675E52271F4BC00B5B59A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9A6675E82271F4BC00B5B59A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9A6675EA2271F4BC00B5B59A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9A6675F82271F6D700B5B59A /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		9A6675F82271F6D700B5B59A /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9A6675FA2271FD0D00B5B59A /* PageOneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageOneViewController.swift; sourceTree = "<group>"; };
 		9A6675FC2271FD2000B5B59A /* PageTwoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageTwoViewController.swift; sourceTree = "<group>"; };
 		9A6675FE2271FD3900B5B59A /* PageThreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageThreeViewController.swift; sourceTree = "<group>"; };
@@ -50,6 +51,7 @@
 		9AB9699422722BC000D774DE /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
 		9AB9699622722D6500D774DE /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
 		9AB9699822722E4200D774DE /* MovieFanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieFanViewController.swift; sourceTree = "<group>"; };
+		9AD284A72277484900CEECBA /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		9AE56BA8227359D400DE31B4 /* MovieFanDataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieFanDataBase.swift; sourceTree = "<group>"; };
 		A464CEFA5147C8017DD2A881 /* Pods_Project3.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Project3.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -162,6 +164,7 @@
 				9A6676002271FD9300B5B59A /* PageViewController.swift */,
 				9AB9699822722E4200D774DE /* MovieFanViewController.swift */,
 				9A4D807E227256EC00BFAA8E /* MovieCellTableViewCell.swift */,
+				9AD284A72277484900CEECBA /* FilterViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Project3/Pods-Project3-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 			);
@@ -306,6 +310,7 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Eureka.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 			);
@@ -325,6 +330,7 @@
 				9AB9699922722E4200D774DE /* MovieFanViewController.swift in Sources */,
 				9A4D807F227256EC00BFAA8E /* MovieCellTableViewCell.swift in Sources */,
 				9A6676012271FD9300B5B59A /* PageViewController.swift in Sources */,
+				9AD284A82277484900CEECBA /* FilterViewController.swift in Sources */,
 				9A4D807D22723B5F00BFAA8E /* MoviesData.swift in Sources */,
 				9A6675FB2271FD0D00B5B59A /* PageOneViewController.swift in Sources */,
 				9AE56BA9227359D400DE31B4 /* MovieFanDataBase.swift in Sources */,

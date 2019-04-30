@@ -35,7 +35,35 @@ struct Genre: Codable {
 class MoviesData {
     
     static func getMoovies(completion: @escaping ([Movie]?,Error?) -> Void) {
-        AF.request("https://api.themoviedb.org/3/discover/movie/?sort_by=vote_average.asc&api_key=b43c71d0fdf94851c8ee07a60a157a5f").responseJSON { response in
+        let genreId = UserDefaults.standard.value(forKey: "genreId") as? Int
+        let optionalYear = UserDefaults.standard.value(forKey: "year") as? Int
+        let optionalAdult = UserDefaults.standard.value(forKey: "adult") as? Bool
+
+        var urlGenre: String = ""
+        var urlYear: String = ""
+        var urlAdult: String = ""
+        
+        if let genre = genreId {
+            urlGenre = "&with_genres=" + String(genre)
+        }
+        
+        if let year = optionalYear {
+            urlYear = "&year=" + String(year)
+        }
+        
+        if let adult = optionalAdult {
+            if adult {
+                urlAdult = "&include_adult=" + "true"
+            } else {
+                urlAdult = "&include_adult=" + "false"
+            }
+            
+        }
+        print(urlGenre)
+        print(urlYear)
+        print(urlAdult)
+        
+        AF.request("https://api.themoviedb.org/3/discover/movie/?sort_by=popularity.desc&\(urlGenre)\(urlYear)\(urlAdult)&api_key=b43c71d0fdf94851c8ee07a60a157a5f").responseJSON { response in
             
             switch response.result {
             case .success(let value):
@@ -66,5 +94,14 @@ class MoviesData {
             case .failure(let error): completion(nil, error)
             }
         }
+    }
+    
+    
+    
+    
+}
+extension Dictionary where Value: Equatable {
+    func allKeys(forValue val: Value) -> [Key] {
+        return self.filter { $1 == val }.map { $0.0 }
     }
 }

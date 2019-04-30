@@ -14,6 +14,8 @@ class MovieFanViewController: UIViewController, UITableViewDelegate, UITableView
     var movies = [MovieObject]()
     var genres = [Int:String]()
 
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var loadingText: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -28,6 +30,7 @@ class MovieFanViewController: UIViewController, UITableViewDelegate, UITableView
                 let realm = try! Realm()
                 
                 realm.beginWrite()
+                realm.deleteAll()
                 for movie in movies {
                     let movieObject = MovieObject()
                     movieObject.title = movie.title
@@ -48,6 +51,9 @@ class MovieFanViewController: UIViewController, UITableViewDelegate, UITableView
                 try! realm.commitWrite()
                 
                 self.movies = Array(realm.objects(MovieObject.self))
+                self.loadingText.isHidden = true
+                self.loadingIndicator.stopAnimating()
+                self.tableView.isHidden = false
                 self.tableView.reloadData()
                 
             } else {
@@ -60,6 +66,7 @@ class MovieFanViewController: UIViewController, UITableViewDelegate, UITableView
                 let realm = try! Realm()
                 
                 realm.beginWrite()
+                realm.deleteAll()
                 for genre in genres {
                     let genreObject = GenreObject()
                     genreObject.id = genre.id
@@ -107,10 +114,9 @@ class MovieFanViewController: UIViewController, UITableViewDelegate, UITableView
             fatalError("The dequeued cell is not an instance of MovieCell.")
         }
         
-        if let image = movies[indexPath.row].image {
-            let url = URL(string: "https://image.tmdb.org/t/p/w200/" + image)
-            let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
-            cell.movieImage.image = UIImage(data: data!)
+        if let image = movies[indexPath.row].image, let url = URL(string: "https://image.tmdb.org/t/p/w200/" + image), let data = try? Data(contentsOf: url)  {
+             //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+            cell.movieImage.image = UIImage(data: data)
         } else {
             cell.movieImage.image = UIImage(named: "noimage")
         }
@@ -135,6 +141,15 @@ class MovieFanViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 163
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if segue.destination is FilterViewController
+        {
+            let vc = segue.destination as? FilterViewController
+            vc?.genres = self.genres
+        }
     }
 
 }
