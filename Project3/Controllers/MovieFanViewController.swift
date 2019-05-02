@@ -8,97 +8,72 @@
 
 import UIKit
 import RealmSwift
+import Alamofire
+import AlamofireImage
 
 class MovieFanViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var movies = [MovieObject]()
     var genres = [Int:String]()
+    var ascending = true
 
+    @IBAction func sortButton(_ sender: UIButton) {
+        if ascending {
+            movies = movies.sorted(by: { (lhsData, rhsData) -> Bool in
+                return lhsData.popularity < rhsData.popularity
+            })
+            sender.setTitle("Best rated ▲", for: .normal)
+            ascending = false
+        } else {
+            movies = movies.sorted(by: { (lhsData, rhsData) -> Bool in
+                return lhsData.popularity > rhsData.popularity
+            })
+            sender.setTitle("Best rated ▼", for: .normal)
+            ascending = true
+        }
+        tableView.reloadData()
+    }
+    @IBOutlet weak var errorView: UIView!
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var loadingText: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let realmModel = RealmModel()
         
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "MovieCell", bundle: nil), forCellReuseIdentifier: "MovieCell")
         
         MoviesData.getMoovies() { (movies,error) in
-            if let movies = movies {
-                let realm = try! Realm()
-                
-                realm.beginWrite()
-                realm.deleteAll()
-                for movie in movies {
-                    let movieObject = MovieObject()
-                    movieObject.title = movie.title
-                    
-                    let listGenres = List<Int>()
-                    for object in movie.genre {
-                        listGenres.append(object)
-                    }
-                    
-                    movieObject.genre = listGenres
-                    movieObject.image = movie.image
-                    movieObject.popularity = movie.popularity
-                    movieObject.overview = movie.overview
-                    
-                    realm.add(movieObject)
-
-                }
-                try! realm.commitWrite()
-                
-                self.movies = Array(realm.objects(MovieObject.self))
-                self.loadingText.isHidden = true
-                self.loadingIndicator.stopAnimating()
-                self.tableView.isHidden = false
-                self.tableView.reloadData()
-                
-            } else {
-                print("error")
+            let (movieList, error) = realmModel.saveMovies(movies, error)
+            if let error = error {
+                self.errorView.isHidden = false
             }
+            self.movies = movieList
+            self.loadingText.isHidden = true
+            self.loadingIndicator.stopAnimating()
+            self.tableView.isHidden = false
+            self.tableView.reloadData()
         }
         
         MoviesData.getGenres() { (genres,error) in
-            if let genres = genres {
-                let realm = try! Realm()
-                
-                realm.beginWrite()
-                realm.deleteAll()
-                for genre in genres {
-                    let genreObject = GenreObject()
-                    genreObject.id = genre.id
-                    genreObject.name = genre.name
-                    
-                    realm.add(genreObject)
-                    
-                    }
-                try! realm.commitWrite()
-            
-                let genreList = Array(realm.objects(GenreObject.self))
-                for genre in genreList {
-                    self.genres[genre.id] = genre.name
-                }
-                print(self.genres.count)
-                self.tableView.reloadData()
-            } else {
-                print("error")
+            let (genreList, error) = realmModel.saveGenres(genres, error)
+            guard error == nil else {
+                return
             }
-            
-            
+            for genre in genreList {
+                self.genres[genre.id] = genre.name
+            }
+            self.tableView.reloadData()
         }
-        
 
-        
-        // Do any additional setup after loading the view.
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        tableView.reloadData()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -113,12 +88,15 @@ class MovieFanViewController: UIViewController, UITableViewDelegate, UITableView
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as? MovieCellTableViewCell else {
             fatalError("The dequeued cell is not an instance of MovieCell.")
         }
-        
-        if let image = movies[indexPath.row].image, let url = URL(string: "https://image.tmdb.org/t/p/w200/" + image), let data = try? Data(contentsOf: url)  {
-             //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
-            cell.movieImage.image = UIImage(data: data)
-        } else {
-            cell.movieImage.image = UIImage(named: "noimage")
+        if let image = movies[indexPath.row].image, let url = URL(string: "https://image.tmdb.org/t/p/w200/" + image) {
+            Alamofire.request(url).responseImage { response in
+                debugPrint(response)
+                debugPrint(response.result)
+                
+                if let imageMovie = response.result.value {
+                    cell.movieImage.image = imageMovie
+                }
+            }
         }
         
         var genreString = ""
@@ -150,6 +128,11 @@ class MovieFanViewController: UIViewController, UITableViewDelegate, UITableView
             let vc = segue.destination as? FilterViewController
             vc?.genres = self.genres
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
     }
 
 }

@@ -221,7 +221,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort by:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yvk-Cq-JJa">
-                                <rect key="frame" x="13" y="75" width="49.5" height="16.5"/>
+                                <rect key="frame" x="13" y="75" width="50" height="17"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                 <color key="textColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -249,18 +249,41 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RiS-h4-Or9">
-                                <rect key="frame" x="76.5" y="72" width="90" height="24"/>
+                                <rect key="frame" x="77" y="72" width="99" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="Wfh-Ce-uIz"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
-                                <state key="normal" title="Best rated ▾">
+                                <state key="normal" title="Best rated ▼">
                                     <color key="titleColor" red="1" green="0.30588235289999999" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="sortButton:" destination="19H-3W-ZAU" eventType="touchUpInside" id="0wr-dM-ZLe"/>
+                                </connections>
                             </button>
+                            <view hidden="YES" contentMode="scaleToFill" restorationIdentifier="noConnectionView" translatesAutoresizingMaskIntoConstraints="NO" id="n14-1A-s3S">
+                                <rect key="frame" x="0.0" y="611" width="375" height="56"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No connection, showing offline results" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lua-CW-RKR">
+                                        <rect key="frame" x="17" y="21" width="237" height="17"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="17" id="1tp-us-IAx"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
+                                        <color key="textColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.30588235289999999" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Lua-CW-RKR" secondAttribute="bottom" constant="18" id="Bix-93-0Bh"/>
+                                    <constraint firstItem="Lua-CW-RKR" firstAttribute="leading" secondItem="n14-1A-s3S" secondAttribute="leading" constant="17" id="r7x-ON-W9c"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="n14-1A-s3S" firstAttribute="leading" secondItem="M8S-ax-Jw2" secondAttribute="leading" id="9sF-rh-NO7"/>
                             <constraint firstItem="hET-xo-Mic" firstAttribute="bottom" secondItem="M8S-ax-Jw2" secondAttribute="bottom" id="9vd-MC-iSI"/>
                             <constraint firstItem="hET-xo-Mic" firstAttribute="leading" secondItem="M8S-ax-Jw2" secondAttribute="leading" id="BRw-kp-y40"/>
                             <constraint firstItem="idD-2i-2Tp" firstAttribute="top" secondItem="1NC-OW-wJb" secondAttribute="top" constant="25" id="DeN-xg-cto"/>
@@ -272,13 +295,17 @@
                             <constraint firstItem="OnV-aE-Wbk" firstAttribute="top" secondItem="ETb-9T-qrO" secondAttribute="bottom" constant="208" id="asb-O5-890"/>
                             <constraint firstItem="idD-2i-2Tp" firstAttribute="leading" secondItem="M8S-ax-Jw2" secondAttribute="leading" constant="126" id="bFn-fQ-eXj"/>
                             <constraint firstItem="hET-xo-Mic" firstAttribute="trailing" secondItem="M8S-ax-Jw2" secondAttribute="trailing" id="jEi-tC-0pq"/>
+                            <constraint firstItem="n14-1A-s3S" firstAttribute="top" secondItem="1NC-OW-wJb" secondAttribute="top" constant="611" id="kdS-ly-tYR"/>
+                            <constraint firstItem="M8S-ax-Jw2" firstAttribute="bottom" secondItem="n14-1A-s3S" secondAttribute="bottom" id="lJa-Kd-nZJ"/>
                             <constraint firstItem="RiS-h4-Or9" firstAttribute="leading" secondItem="yvk-Cq-JJa" secondAttribute="trailing" constant="14" id="lZT-e6-76U"/>
+                            <constraint firstItem="n14-1A-s3S" firstAttribute="trailing" secondItem="M8S-ax-Jw2" secondAttribute="trailing" id="lyV-lT-rbx"/>
                             <constraint firstItem="M8S-ax-Jw2" firstAttribute="trailing" secondItem="ETb-9T-qrO" secondAttribute="trailing" constant="17" id="wdM-5y-92E"/>
                             <constraint firstItem="RiS-h4-Or9" firstAttribute="top" secondItem="idD-2i-2Tp" secondAttribute="bottom" constant="17" id="y5b-bo-ljM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="M8S-ax-Jw2"/>
                     </view>
                     <connections>
+                        <outlet property="errorView" destination="n14-1A-s3S" id="ZqW-NB-8c0"/>
                         <outlet property="loadingIndicator" destination="OnV-aE-Wbk" id="ZzE-M6-PFa"/>
                         <outlet property="loadingText" destination="lBg-t5-etZ" id="0eG-O3-fIx"/>
                         <outlet property="tableView" destination="hET-xo-Mic" id="1SF-VO-CPD"/>
@@ -314,8 +341,8 @@
                                             <color key="titleColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="applyButton:" destination="MQk-ru-zWe" eventType="touchUpInside" id="PfL-DU-MC3"/>
-                                            <segue destination="19H-3W-ZAU" kind="presentation" modalTransitionStyle="coverVertical" id="9PH-5a-qAI"/>
+                                            <action selector="applyButton:" destination="MQk-ru-zWe" eventType="touchUpInside" id="Msb-yp-leX"/>
+                                            <segue destination="19H-3W-ZAU" kind="presentation" id="nOe-1l-KiP"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ydb-Jj-fgo">
@@ -359,7 +386,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CY1-id-2rN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3280.8000000000002" y="814.54272863568224"/>
+            <point key="canvasLocation" x="3316" y="815"/>
         </scene>
     </scenes>
     <resources>
@@ -370,6 +397,6 @@
         <image name="onboarding3" width="247" height="247"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="9PH-5a-qAI"/>
+        <segue reference="nOe-1l-KiP"/>
     </inferredMetricsTieBreakers>
 </document>

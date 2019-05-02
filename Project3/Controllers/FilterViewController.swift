@@ -19,7 +19,6 @@ class FilterViewController: FormViewController {
         UserDefaults.standard.removeObject(forKey: "year")
         UserDefaults.standard.removeObject(forKey: "adult")
         
-        print("Asd")
         form.setValues(["genre" : "Any", "year" : "", "adult" : false])
         tableView.reloadData()
     }
@@ -70,11 +69,6 @@ class FilterViewController: FormViewController {
                 }
 
     }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
     
     func listOfGenres() -> [String] {
         var res = [String]()

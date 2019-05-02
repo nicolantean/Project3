@@ -24,7 +24,6 @@ struct Movie: Codable {
         case popularity
         case overview
     }
-    
 }
 
 struct Genre: Codable {
@@ -62,8 +61,7 @@ class MoviesData {
         print(urlGenre)
         print(urlYear)
         print(urlAdult)
-        
-        AF.request("https://api.themoviedb.org/3/discover/movie/?sort_by=popularity.desc&\(urlGenre)\(urlYear)\(urlAdult)&api_key=b43c71d0fdf94851c8ee07a60a157a5f").responseJSON { response in
+    Alamofire.request("https://api.themoviedb.org/3/discover/movie/?sort_by=popularity.desc&\(urlGenre)\(urlYear)\(urlAdult)&api_key=b43c71d0fdf94851c8ee07a60a157a5f").responseJSON { response in
             
             switch response.result {
             case .success(let value):
@@ -80,7 +78,7 @@ class MoviesData {
     }
     
     static func getGenres(completion: @escaping ([Genre]?,Error?) -> Void) {
-        AF.request("https://api.themoviedb.org/3/genre/movie/list?api_key=b43c71d0fdf94851c8ee07a60a157a5f&language=en-US").responseJSON { response in
+        Alamofire.request("https://api.themoviedb.org/3/genre/movie/list?api_key=b43c71d0fdf94851c8ee07a60a157a5f&language=en-US").responseJSON { response in
             
             switch response.result {
             case .success(let value):
@@ -96,12 +94,4 @@ class MoviesData {
         }
     }
     
-    
-    
-    
-}
-extension Dictionary where Value: Equatable {
-    func allKeys(forValue val: Value) -> [Key] {
-        return self.filter { $1 == val }.map { $0.0 }
-    }
 }
