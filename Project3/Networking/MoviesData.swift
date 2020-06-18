@@ -24,7 +24,6 @@ struct Movie: Codable {
         case popularity
         case overview
     }
-    
 }
 
 struct Genre: Codable {
@@ -35,7 +34,34 @@ struct Genre: Codable {
 class MoviesData {
     
     static func getMoovies(completion: @escaping ([Movie]?,Error?) -> Void) {
-        AF.request("https://api.themoviedb.org/3/discover/movie/?sort_by=vote_average.asc&api_key=b43c71d0fdf94851c8ee07a60a157a5f").responseJSON { response in
+        let genreId = UserDefaults.standard.value(forKey: "genreId") as? Int
+        let optionalYear = UserDefaults.standard.value(forKey: "year") as? Int
+        let optionalAdult = UserDefaults.standard.value(forKey: "adult") as? Bool
+
+        var urlGenre: String = ""
+        var urlYear: String = ""
+        var urlAdult: String = ""
+        
+        if let genre = genreId {
+            urlGenre = "&with_genres=" + String(genre)
+        }
+        
+        if let year = optionalYear {
+            urlYear = "&year=" + String(year)
+        }
+        
+        if let adult = optionalAdult {
+            if adult {
+                urlAdult = "&include_adult=" + "true"
+            } else {
+                urlAdult = "&include_adult=" + "false"
+            }
+            
+        }
+        print(urlGenre)
+        print(urlYear)
+        print(urlAdult)
+    Alamofire.request("https://api.themoviedb.org/3/discover/movie/?sort_by=popularity.desc&\(urlGenre)\(urlYear)\(urlAdult)&api_key=b43c71d0fdf94851c8ee07a60a157a5f").responseJSON { response in
             
             switch response.result {
             case .success(let value):
@@ -52,7 +78,7 @@ class MoviesData {
     }
     
     static func getGenres(completion: @escaping ([Genre]?,Error?) -> Void) {
-        AF.request("https://api.themoviedb.org/3/genre/movie/list?api_key=b43c71d0fdf94851c8ee07a60a157a5f&language=en-US").responseJSON { response in
+        Alamofire.request("https://api.themoviedb.org/3/genre/movie/list?api_key=b43c71d0fdf94851c8ee07a60a157a5f&language=en-US").responseJSON { response in
             
             switch response.result {
             case .success(let value):
@@ -67,4 +93,5 @@ class MoviesData {
             }
         }
     }
+    
 }

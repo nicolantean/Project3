@@ -5,7 +5,9 @@ target 'Project3' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
-  pod 'Alamofire', '~> 5.0.0-beta.5'
+  pod 'Alamofire', '~> 4.8'
   pod 'RealmSwift'
+  pod 'Eureka'
+  pod 'AlamofireImage', '~> 3.5'
 
 end
